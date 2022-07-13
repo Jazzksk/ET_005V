@@ -1,0 +1,100 @@
+{% extends 'core/layout.html' %}
+
+{% block content %}
+<div class="row">
+
+    <!-- MENSAJE DE ERROR -->
+    {% if error_message %}
+    <div class="row">
+        <div class="col">
+            <strong>{{ error_message }}</strong>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="col"> 
+        <!-- TITULO -->
+        <div class="col-12">
+            <h3>Agregar producto</h3>
+        </div>
+
+        <!-- FORMULARIO -->
+        <form action="{% url 'CORE:producto_create' %}" method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <!-- NOMBRE PRODUCTO -->
+            <div >
+                <input class="form-control" type="text" name="titulo" placeholder="Ingrese el nombre del producto..." required>
+            </div>
+            <br>
+            <br>
+            <div>
+
+                <!-- IMAGEN -->
+                <div>
+                    <div class="form-group">
+                        <label for="imagen">Imagen producto</label>
+                        <input type="file" class="form-control-file" name="imagen" id="imagen"
+                            placeholder="Ingrese la imagen..." required>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <!-- CATEGORIA -->
+                    <div>
+                        <select class="custom-select" name="categoria" required>
+                            <option value="" selected>-- Seleccione la categoria --</option>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">{{ categoria.descripcion }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <!-- DESCRIPCION -->
+                    <div>
+                        <textarea class="form-control" name="descripcion" rows="3" required></textarea>
+                    </div>
+                    <br>
+                    <div>
+                        <div >
+                            <!-- PRECIO -->
+                            <div >
+                                <div >
+                                    <div >
+                                        <div >Stock: </div>
+                                    </div>
+                                    <input type="number" class="form-control" name="stock" placeholder="XXXX.XX" required>
+                                </div>
+                            </div>
+                            <br>
+                            <div >
+                                <div >
+                                    <div >
+                                        <div >Precio: $</div>
+                                    </div>
+                                    <input type="number" class="form-control" name="precio" placeholder="XXXX.XX" required>
+                                </div>
+                            </div>
+                            <br>
+                            <div >
+                                <div >
+                                    <div >
+                                        <div >Descuento: </div>
+                                    </div>
+                                    <input type="number" class="form-control" name="descuento" placeholder="XXXX%" required>
+                                </div>
+                            </div>
+                            <!-- BOTON -->
+                            <div >
+                                <button type="submit" class="btn btn-success btn-block">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

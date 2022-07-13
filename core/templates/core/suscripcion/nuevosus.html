@@ -1,0 +1,19 @@
+{% extends 'core/layout.html' %}
+
+{% block content %}
+
+<form action="http://127.0.0.1:8000/api/obtener_suscripcion" method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <div>
+
+        <input type="text" name="usuario" value="{{ user.username }}">
+        <input type="text" name="vigente" value="">
+        <input class="botons" type="submit" value="Enviar" >
+
+    </div>
+
+</form>
+
+{% endblock %}
